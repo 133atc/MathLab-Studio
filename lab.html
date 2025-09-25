@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Math Lab — Calculator & Converter</title>
+ <link rel="stylesheet" href="design.css">
+</head>
+<body data-theme="light">
+  <main class="app" role="application" aria-label="Calculator and Converter">
+    <div class="topbar">
+      <div class="brand">Math Lab</div>
+      <div class="actions">
+        <button class="chip" id="kbBtn" title="Keyboard shortcuts (?)">Shortcuts</button>
+        <button class="chip" id="themeBtn" title="Toggle theme (T)">Toggle Theme</button>
+        <div class="tabs" role="tablist" aria-label="Switch view">
+          <button class="tab" id="tab-calc" role="tab" aria-selected="true" aria-controls="pane-calc" title="Calculator (Ctrl/⌘+1)">Calculator</button>
+          <button class="tab" id="tab-conv" role="tab" aria-selected="false" aria-controls="pane-conv" title="Converter (Ctrl/⌘+2)">Converter</button>
+        </div>
+      </div>
+    </div>
+
+    
+    <section id="pane-calc" class="pane" aria-hidden="false">
+      <div class="pane-inner">
+        <div class="calculator" id="calc">
+          <div class="calc-top">
+            <div>Scientific Calculator</div>
+            <button type="button" class="chip" data-action="mode">Mode: <strong data-mode>DEG</strong></button>
+          </div>
+          <section class="display" aria-live="polite">
+            <div class="expr" data-expr> </div>
+            <div class="result" data-result>0</div>
+          </section>
+          <section class="pads" data-pads>
+            <div class="row fn" aria-label="Functions and constants">
+              <button data-action="func" data-fn="sin">sin</button>
+              <button data-action="func" data-fn="cos">cos</button>
+              <button data-action="func" data-fn="tan">tan</button>
+              <button data-action="func" data-fn="ln">ln</button>
+              <button data-action="func" data-fn="log10">log</button>
+              <button data-action="func" data-fn="sqrt">√</button>
+
+              <button data-action="pow" data-op="square">x²</button>
+              <button data-action="pow" data-op="cube">x³</button>
+              <button data-action="func" data-fn="inv">1/x</button>
+              <button data-action="func" data-fn="fact">n!</button>
+              <button data-action="const" data-symbol="pi">π</button>
+              <button data-action="const" data-symbol="e">e</button>
+            </div>
+
+            <div class="row ops" aria-label="Operators">
+              <button class="danger" data-action="clear">AC</button>
+              <button data-action="backspace">⌫</button>
+              <button data-action="percent">%</button>
+              <button class="op" data-action="operator" data-operator="divide">÷</button>
+
+              <button data-action="paren" data-paren="(">(</button>
+              <button data-action="paren" data-paren=")">)</button>
+              <button data-action="operator" data-operator="power">^</button>
+              <button class="op" data-action="operator" data-operator="multiply">×</button>
+
+              <button data-action="digit" data-digit="7">7</button>
+              <button data-action="digit" data-digit="8">8</button>
+              <button data-action="digit" data-digit="9">9</button>
+              <button class="op" data-action="operator" data-operator="subtract">−</button>
+
+              <button data-action="digit" data-digit="4">4</button>
+              <button data-action="digit" data-digit="5">5</button>
+              <button data-action="digit" data-digit="6">6</button>
+              <button class="op" data-action="operator" data-operator="add">+</button>
+
+              <button data-action="digit" data-digit="1">1</button>
+              <button data-action="digit" data-digit="2">2</button>
+              <button data-action="digit" data-digit="3">3</button>
+              <button class="primary" data-action="equal">=</button>
+
+              <button data-action="negate">±</button>
+              <button class="span-2" data-action="digit" data-digit="0">0</button>
+              <button data-action="decimal">.</button>
+            </div>
+          </section>
+        </div>
+        <div></div>
+      </div>
+    </section>
+
+
+    <section id="pane-conv" class="pane" aria-hidden="true">
+      <div class="pane-inner">
+        <div id="conv">
+          <div style="padding:10px 14px; border-bottom:1px solid color-mix(in srgb, #000 16%, transparent); color:var(--muted); font-size:.9rem;">
+            Unit & Currency Converter
+          </div>
+          <section class="grid">
+            <div class="row2">
+              <div>
+                <label for="category">Category</label>
+                <select id="category">
+                  <option value="currency">Currency</option>
+                  <option value="length">Length</option>
+                  <option value="mass">Mass</option>
+                  <option value="temperature">Temperature</option>
+                  <option value="speed">Speed</option>
+                  <option value="area">Area</option>
+                  <option value="volume">Volume</option>
+                  <option value="time">Time</option>
+                  <option value="data">Data</option>
+                  <option value="energy">Energy</option>
+                  <option value="pressure">Pressure</option>
+                </select>
+              </div>
+              <div>
+                <label for="amount">Amount</label>
+                <input id="amount" type="number" step="any" value="1"/>
+              </div>
+            </div>
+            <div class="row2">
+              <div>
+                <label for="fromUnit" id="fromLabel">From</label>
+                <select id="fromUnit"></select>
+              </div>
+              <div>
+                <label for="toUnit" id="toLabel">To</label>
+                <select id="toUnit"></select>
+              </div>
+            </div>
+            <div class="row2">
+              <div class="swap">
+                <button id="swapBtn">Swap ↔</button>
+              </div>
+              <div>
+                <div class="muted">Result</div>
+                <div class="conv-result" id="result">—</div>
+              </div>
+            </div>
+          </section>
+          <div id="meta" class="note"></div>
+        </div>
+        <div></div>
+      </div>
+    </section>
+
+   
+    <div id="kbHelp" class="overlay" aria-hidden="true">
+      <div class="modal" role="dialog" aria-modal="true" aria-labelledby="kbTitle">
+        <header class="modal-head">
+          <h2 id="kbTitle">Keyboard Shortcuts</h2>
+          <button class="chip" data-close aria-label="Close help">Close</button>
+        </header>
+        <div class="modal-body">
+          <ul>
+            <li><kbd>Ctrl</kbd>/<kbd>⌘</kbd> + <kbd>1</kbd> — Switch to <strong>Calculator</strong></li>
+            <li><kbd>Ctrl</kbd>/<kbd>⌘</kbd> + <kbd>2</kbd> — Switch to <strong>Converter</strong></li>
+            <li><kbd>?</kbd> — Open/close <strong>Help</strong></li>
+            <li><kbd>T</kbd> — Toggle <strong>Theme</strong> (Light/Dark)</li>
+            <li class="muted">Calculator: digits & operators; <kbd>Enter</kbd> = equals, <kbd>Backspace</kbd> = delete, <kbd>Delete</kbd> = AC</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
